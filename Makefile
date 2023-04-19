@@ -1,5 +1,5 @@
 start-databases:
-	@docker-compose up -d postgres mongo
+	@docker compose up -d postgres mongo
 
 start-api:
 	@docker-compose up --build api

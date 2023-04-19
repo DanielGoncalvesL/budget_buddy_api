@@ -7,6 +7,7 @@ import {
   Repository,
   Connection,
   getRepository,
+  ObjectLiteral,
 } from 'typeorm';
 import {
   PgConnectionNotFoundError,
@@ -82,7 +83,9 @@ export class PgConnection implements DbTransaction {
     await this.query.rollbackTransaction();
   }
 
-  getRepository<Entity>(entity: ObjectType<Entity>): Repository<Entity> {
+  getRepository<Entity extends ObjectLiteral>(
+    entity: ObjectType<Entity>,
+  ): Repository<Entity> {
     if (this.connection === undefined) {
       throw new PgConnectionNotFoundError();
     }
